@@ -1,0 +1,22 @@
+<!-- Sing in modal -->
+    <div class="modal fade" id="{% block modal_id %}idModal{% endblock modal_id %}" tabindex="-1" aria-labelledby="{% block modal_label1 %}formModalLabel{% endblock modal_label1 %}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="{% block modal_label2 %}formModalLabel{% endblock modal_label2 %}">{% block modal_title %}Форма{% endblock modal_title %}</h5>
+                    <button class="btn btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{% block action_url %}#{% endblock action_url %}" method='post' id="{% block modal_form_id %}idModalForm{% endblock modal_form_id %}">
+                        {% csrf_token %}
+                        {% block modal_body %}{% endblock modal_body %}
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" data-bs-dismiss="modal" aria-label="close" type="button">Закрыть</button>
+                            <button class="btn btn-{% block modal_footer_submit_button %}success{% endblock modal_footer_submit_button %}" type="submit">{% block modal_footer_submit_button_label %}Submit{% endblock modal_footer_submit_button_label %}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->

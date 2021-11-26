@@ -1,0 +1,9 @@
+version: '3.7'
+services:
+    web:
+        restart: always
+        build: 
+            context: ./src
+            dockerfile: Dockerfile.prod
+        env_file:
+            - ./.env.prod

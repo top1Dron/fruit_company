@@ -1,0 +1,27 @@
+{% extends 'admin/modal.html' %}
+
+{% block modal_id %}buyPineapplesModal{% endblock modal_id %}
+
+{% block modal_label1 %}{% block modal_label2 %}buyPineapplesModalLabel{% endblock modal_label2 %}{% endblock modal_label1 %}
+
+{% block modal_title %}Купить ананасы{% endblock modal_title %}
+
+{% block action_url %}{% url 'admin:buy_pineapples' %}{% endblock action_url %}
+
+{% block modal_form_id %}idBuyPineapplesModalForm{% endblock modal_form_id %}
+
+{% block modal_body %}
+    <div id="id_buy_pineapples_errors"></div>
+    <div class="form-group g-3">
+        <label for="id_pineapples_count">Введите количество ананасов, которое хотите купить</label>
+        <input id="id_pineapples_count" type="number" class="form-control" min="0" name="pineapples_count">
+    </div>
+    <div class="form-group g-3">
+        <label for="id_pineapples_seconds">Введите частоту поставок, в секундах</label>
+        <input id="id_pineapples_seconds" type="number" class="form-control" min="0" name="pineapples_seconds">
+    </div>
+{% endblock modal_body %}
+
+{% block modal_footer_submit_button %}success{% endblock modal_footer_submit_button %}
+
+{% block modal_footer_submit_button_label %}Купить{% endblock modal_footer_submit_button_label %}

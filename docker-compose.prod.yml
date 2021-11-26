@@ -1,0 +1,76 @@
+version: '3.7'
+services:
+    wsgiweb:
+        # command: uvicorn config.asgi:application --reload --host 0.0.0.0 --port 8000
+        extends:
+            file: docker-compose.base.yml
+            service: web
+        command: >
+            bash -c "gunicorn config.wsgi:application --bind 0.0.0.0:8000 --reload"
+        ports:
+            - "8000:8000"
+        depends_on:
+          - db
+    asgiweb:
+        extends:
+            file: docker-compose.base.yml
+            service: web
+        command: >
+            bash -c "daphne -b 0.0.0.0 -p 9000 config.asgi:application"
+        ports:
+            - "9000:9000"
+        depends_on:
+            - db
+    db:
+        restart: always
+        image: postgres:13.3
+        volumes:
+            - ./postgres_data:/var/lib/postgresql/data/
+        env_file:
+            - ./.env.prod.db
+        ports:
+            - "5431:5432"
+    redis:
+        image: redis
+        restart: always
+        command: ["redis-server", "--port", "6379", "--appendonly", "yes","--maxmemory", "2gb", "--maxmemory-policy", "allkeys-lru"]
+    celery_worker:
+        extends:
+            file: docker-compose.base.yml
+            service: web
+        command: >
+            bash -c "celery -A config worker -l INFO -n worker1@worker
+            && celery -A config worker -l INFO -n worker2@worker -Q queue1"
+        volumes:
+        - .:/src
+        restart: always
+        depends_on:
+            - wsgiweb
+            - asgiweb
+            - redis
+    celery_beat:
+        extends:
+            file: docker-compose.base.yml
+            service: web
+        command: "celery -A config beat -l INFO"
+        volumes:
+        - .:/src
+        restart: always
+        depends_on:
+            - wsgiweb
+            - asgiweb
+            - redis
+    nginx:
+        restart: always
+        build: ./nginx
+        volumes:
+            - static_volume:/home/app/web/static
+            - media_volume:/home/app/web/media
+        ports:
+            - 80:80
+        depends_on:
+            - wsgiweb
+            - asgiweb
+volumes:
+    static_volume:
+    media_volume:

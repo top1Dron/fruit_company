@@ -1,0 +1,27 @@
+{% extends 'admin/modal.html' %}
+
+{% block modal_id %}sellApplesModal{% endblock modal_id %}
+
+{% block modal_label1 %}{% block modal_label2 %}sellApplesModalLabel{% endblock modal_label2 %}{% endblock modal_label1 %}
+
+{% block modal_title %}Продать яблоки{% endblock modal_title %}
+
+{% block action_url %}{% url 'admin:sell_apples' %}{% endblock action_url %}
+
+{% block modal_form_id %}idSellApplesModalForm{% endblock modal_form_id %}
+
+{% block modal_body %}
+    <div id="id_sell_apples_errors"></div>
+    <div class="form-group g-3">
+        <label for="id_sell_apples_count">Введите количество яблок, которое хотите продавать</label>
+        <input id="id_sell_apples_count" type="number" class="form-control" min="0" name="apples_count">
+    </div>
+    <div class="form-group g-3">
+        <label for="id_sell_apples_seconds">Введите частоту продаж, в секундах</label>
+        <input id="id_sell_apples_seconds" type="number" class="form-control" min="0" name="apples_seconds">
+    </div>
+{% endblock modal_body %}
+
+{% block modal_footer_submit_button %}danger{% endblock modal_footer_submit_button %}
+
+{% block modal_footer_submit_button_label %}Продать{% endblock modal_footer_submit_button_label %}

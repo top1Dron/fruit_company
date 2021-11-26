@@ -1,0 +1,23 @@
+{% extends 'admin/modal.html' %}
+
+{% block modal_id %}takeMoneyModal{% endblock modal_id %}
+
+{% block modal_label1 %}{% block modal_label2 %}takeMoneyModalLabel{% endblock modal_label2 %}{% endblock modal_label1 %}
+
+{% block modal_title %}Снять средства со счёта{% endblock modal_title %}
+
+{% block action_url %}{% url 'admin:take_money' %}{% endblock action_url %}
+
+{% block modal_form_id %}idtakeMoneyModalForm{% endblock modal_form_id %}
+
+{% block modal_body %}
+    <div id="id_take_money_errors"></div>
+    <div class="form-group g-3">
+        <label for="id_take_money">Введите средства, которые хотите снять со счёта</label>
+        <input id="id_take_money" type="number" class="form-control" min="0" name="take_money">
+    </div>
+{% endblock modal_body %}
+
+{% block modal_footer_submit_button %}danger{% endblock modal_footer_submit_button %}
+
+{% block modal_footer_submit_button_label %}Снять{% endblock modal_footer_submit_button_label %}

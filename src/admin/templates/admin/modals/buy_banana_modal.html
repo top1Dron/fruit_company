@@ -1,0 +1,27 @@
+{% extends 'admin/modal.html' %}
+
+{% block modal_id %}buyBananasModal{% endblock modal_id %}
+
+{% block modal_label1 %}{% block modal_label2 %}buyBananasModalLabel{% endblock modal_label2 %}{% endblock modal_label1 %}
+
+{% block modal_title %}Купить бананы{% endblock modal_title %}
+
+{% block action_url %}{% url 'admin:buy_bananas' %}{% endblock action_url %}
+
+{% block modal_form_id %}idBuyBananasModalForm{% endblock modal_form_id %}
+
+{% block modal_body %}
+    <div id="id_buy_bananas_errors"></div>
+    <div class="form-group g-3">
+        <label for="id_bananas_count">Введите количество бананов, которое хотите купить</label>
+        <input id="id_bananas_count" type="number" class="form-control" min="0" name="bananas_count">
+    </div>
+    <div class="form-group g-3">
+        <label for="id_bananas_seconds">Введите частоту поставок, в секундах</label>
+        <input id="id_bananas_seconds" type="number" class="form-control" min="0" name="bananas_seconds">
+    </div>
+{% endblock modal_body %}
+
+{% block modal_footer_submit_button %}success{% endblock modal_footer_submit_button %}
+
+{% block modal_footer_submit_button_label %}Купить{% endblock modal_footer_submit_button_label %}
