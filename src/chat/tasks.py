@@ -53,19 +53,13 @@ get_joke_periodic_task = PeriodicTask.objects.update_or_create(
         'task':'chat.tasks.get_joke'}
 )
 
-get_joke_periodic_task.enabled = True
-get_joke_periodic_task.save()
-
 update_chat_periodic_task = PeriodicTask.objects.update_or_create(
     name='Update chat',
     defaults={
         'name': 'Update chat', 
         'task': 'chat.tasks.update_chat',
         'interval': IntervalSchedule.objects.get_or_create(
-            every=1, 
+            every=3, 
             period=IntervalSchedule.SECONDS)[0]
     }
 )
-
-update_chat_periodic_task.enabled = True
-update_chat_periodic_task.save()

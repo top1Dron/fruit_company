@@ -19,7 +19,7 @@ def update_last_operations():
         'operations': operations,
     })
 
-update_last_operations_periodic_task = PeriodicTask.objects.update_or_create(
+PeriodicTask.objects.update_or_create(
     name='Update last operations',
     defaults={
         'name': 'Update last operations', 
@@ -29,9 +29,6 @@ update_last_operations_periodic_task = PeriodicTask.objects.update_or_create(
             period=IntervalSchedule.SECONDS)[0]
     }
 )
-
-update_last_operations_periodic_task.enabled = True
-update_last_operations_periodic_task.save()
 
 
 @shared_task
@@ -96,38 +93,25 @@ def buy_peaches(count: int):
             ' - ' + operation.get_status_display() + ': ' + operation.message + '\n')
     })
 
-
-buy_apples_periodic_task = utils.update_or_create_periodic_task_on_buy_fruit(
+utils.update_or_create_periodic_task_on_buy_fruit(
     fruit='apples', 
     interval=6, 
     count=randint(1, 10))
 
-buy_apples_periodic_task.enabled = True
-buy_apples_periodic_task.save()
-
-buy_bananas_periodic_task = utils.update_or_create_periodic_task_on_buy_fruit(
+utils.update_or_create_periodic_task_on_buy_fruit(
     fruit='bananas', 
     interval=9, 
     count=randint(10, 20))
 
-buy_bananas_periodic_task.enabled = True
-buy_bananas_periodic_task.save()
-
-buy_pineapples_periodic_task = utils.update_or_create_periodic_task_on_buy_fruit(
+utils.update_or_create_periodic_task_on_buy_fruit(
     fruit='pineapples', 
     interval=12, 
     count=randint(1, 10))
 
-buy_pineapples_periodic_task.enabled = True
-buy_pineapples_periodic_task.save()
-
-buy_peaches_periodic_task = utils.update_or_create_periodic_task_on_buy_fruit(
+utils.update_or_create_periodic_task_on_buy_fruit(
     fruit='peaches', 
     interval=15, 
     count=randint(5, 15))
-
-buy_peaches_periodic_task.enabled = True
-buy_peaches_periodic_task.save()
 
 
 @shared_task
@@ -193,37 +177,25 @@ def sell_peaches(count: int):
     })
 
 
-sell_apples_periodic_task = utils.update_or_create_periodic_task_on_sell_fruit(
+utils.update_or_create_periodic_task_on_sell_fruit(
     fruit='apples', 
     interval=15, 
     count=randint(1, 10))
 
-sell_apples_periodic_task.enabled = True
-sell_apples_periodic_task.save()
-
-sell_bananas_periodic_task = utils.update_or_create_periodic_task_on_sell_fruit(
+utils.update_or_create_periodic_task_on_sell_fruit(
     fruit='bananas', 
     interval=12, 
     count=randint(1, 30))
 
-sell_bananas_periodic_task.enabled = True
-sell_bananas_periodic_task.save()
-
-sell_pineapples_periodic_task = utils.update_or_create_periodic_task_on_sell_fruit(
+utils.update_or_create_periodic_task_on_sell_fruit(
     fruit='pineapples', 
     interval=9, 
     count=randint(1, 10))
 
-sell_pineapples_periodic_task.enabled = True
-sell_pineapples_periodic_task.save()
-
-sell_peaches_periodic_task = utils.update_or_create_periodic_task_on_sell_fruit(
+utils.update_or_create_periodic_task_on_sell_fruit(
     fruit='peaches', 
     interval=6, 
     count=randint(1, 20))
-
-sell_peaches_periodic_task.enabled = True
-sell_peaches_periodic_task.save()
 
 
 @shared_task
