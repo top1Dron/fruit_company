@@ -4,7 +4,7 @@ import json
 from asgiref.sync import async_to_sync
 from celery import shared_task
 from channels.layers import get_channel_layer
-from django_celery_beat.models import PeriodicTask, IntervalSchedule
+from django_celery_beat.models import IntervalSchedule, PeriodicTask, PeriodicTasks
 
 from admin import utils
 
@@ -201,3 +201,5 @@ utils.update_or_create_periodic_task_on_sell_fruit(
 @shared_task
 def checking_storage():
     result = [i for i in range(utils.number_range(2, 1), utils.number_range(2, 21)+1) if utils.filter_num(i)]
+
+PeriodicTasks.changed()

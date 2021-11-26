@@ -2,7 +2,7 @@ from asgiref.sync import async_to_sync
 from celery import shared_task
 from channels.layers import get_channel_layer
 from django.contrib.auth.models import User
-from django_celery_beat.models import PeriodicTask, IntervalSchedule
+from django_celery_beat.models import IntervalSchedule, PeriodicTask, PeriodicTasks
 import requests
 
 from chat import utils as chat_utils
@@ -63,3 +63,5 @@ update_chat_periodic_task = PeriodicTask.objects.update_or_create(
             period=IntervalSchedule.SECONDS)[0]
     }
 )
+
+PeriodicTasks.changed()
