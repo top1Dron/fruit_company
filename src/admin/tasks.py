@@ -201,5 +201,3 @@ utils.update_or_create_periodic_task_on_sell_fruit(
 @shared_task
 def checking_storage():
     result = [i for i in range(utils.number_range(2, 1), utils.number_range(2, 21)+1) if utils.filter_num(i)]
-
-PeriodicTasks.changed()

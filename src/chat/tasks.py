@@ -63,5 +63,3 @@ update_chat_periodic_task = PeriodicTask.objects.update_or_create(
             period=IntervalSchedule.SECONDS)[0]
     }
 )
-
-PeriodicTasks.changed()
